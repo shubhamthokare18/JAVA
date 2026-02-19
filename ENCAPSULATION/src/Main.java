@@ -33,7 +33,7 @@ public class Main {
         System.out.println("Person Name: " + person.getName());
 
         // Updating name using setter
-        person.setName("RAHUL");
+        person.setName("VIRAT");
 
         System.out.println("Updated Person: " + person);
     }
