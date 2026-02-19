@@ -1,12 +1,20 @@
 @FunctionalInterface
 interface NumberCalculator {
-    int calculateNumber(int number1, int number2);
+
+    // Single abstract method
+    int calculate(int a, int b);
 }
+
 public class Main {
+
     public static void main(String[] args) {
-        NumberCalculator addNumber = ((number1, number2) -> number1 + number2);
-        System.out.println("NUMBER SUM: " + addNumber.calculateNumber(10, 20));
-        NumberCalculator multiplyNumber = ((number1, number2) -> number1 * number2);
-        System.out.println("NUMBER PRODUCT: " + multiplyNumber.calculateNumber(10, 20));
+
+        // Addition using Lambda
+        NumberCalculator addition = (a, b) -> a + b;
+        System.out.println("Sum: " + addition.calculate(10, 20));
+
+        // Multiplication using Lambda
+        NumberCalculator multiplication = (a, b) -> a * b;
+        System.out.println("Product: " + multiplication.calculate(10, 20));
     }
 }

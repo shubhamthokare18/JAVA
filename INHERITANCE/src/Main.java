@@ -1,10 +1,24 @@
-public class Main {
-    protected String carBrand = "FORD";
+// Parent class
+class Vehicle {
+
+    protected String brand = "Ford";
 }
-class Car extends Main {
-    private final String carModel = "MUSTANG";
+
+// Child class
+class Car extends Vehicle {
+
+    private final String model = "Mustang";
+
+    public void printDetails() {
+        System.out.println("Car Brand: " + brand + ", Car Model: " + model);
+    }
+}
+
+public class Main {
+
     public static void main(String[] args) {
+
         Car car = new Car();
-        System.out.println("CAR BRAND: " + car.carBrand + ", CAR MODEL: " + car.carModel);
+        car.printDetails();
     }
 }

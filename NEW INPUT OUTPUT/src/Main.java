@@ -1,75 +1,123 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Main main = new Main();
-        main.createDirectory();
+
+    private static final Path DIRECTORY_PATH =
+            Paths.get("C:\\Users\\Sreenivas Bandaru\\Desktop\\JAVA\\NEW INPUT OUTPUT\\DIRECTORY");
+
+    private static final String FILE_NAME = "file.txt";
+
+    public static void main(String[] args) {
+
+        Main app = new Main();
+
+        try {
+            Path directory = app.createDirectory();
+            Path file = app.createFile(directory);
+
+            app.writeUsingFiles(file);
+            app.appendUsingBufferedWriter(file);
+
+            System.out.println("\nReading using Files.readAllLines():");
+            app.readUsingFiles(file);
+
+            System.out.println("\nReading using BufferedReader:");
+            app.readUsingBufferedReader(file);
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    public void createDirectory() throws IOException {
-        Path path = Paths.get("C:\\Users\\Sreenivas Bandaru\\Desktop\\JAVA\\NEW INPUT OUTPUT\\DIRECTORY");
-        if (!Files.exists(path)) {
-            Files.createDirectory(path);
+
+    // ===== Create Directory =====
+    public Path createDirectory() throws IOException {
+
+        if (Files.exists(DIRECTORY_PATH)) {
+            System.out.println("Directory already exists.");
         } else {
-            System.out.println("DIRECTORY EXISTS");
+            Files.createDirectories(DIRECTORY_PATH);
+            System.out.println("Directory created successfully.");
         }
-        createFile(path);
+
+        return DIRECTORY_PATH;
     }
 
-    public void createFile(Path path) throws IOException {
-        Path resolve = path.resolve("FILE.TXT");
-        if (!Files.exists(resolve)) {
-            Files.createFile(resolve);
+
+    // ===== Create File =====
+    public Path createFile(Path directory) throws IOException {
+
+        Path filePath = directory.resolve(FILE_NAME);
+
+        if (Files.exists(filePath)) {
+            System.out.println("File already exists.");
         } else {
-            System.out.println("FILE EXISTS");
+            Files.createFile(filePath);
+            System.out.println("File created successfully.");
         }
-        writeFile(resolve);
-        writeBufferedFile(resolve);
+
+        return filePath;
     }
 
-    public void writeFile(Path resolve) throws IOException {
-        List<String> list = Arrays.asList("HELLO");
-        Files.write(resolve, list, StandardCharsets.UTF_8);
-        try(BufferedWriter bufferedWriter = Files.newBufferedWriter(resolve, StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
-            bufferedWriter.write("HEY");
-        } catch (IOException ioException) {
-            throw new RuntimeException();
-        }
-        readFile(resolve);
+
+    // ===== Write Using Files.write (NIO) =====
+    public void writeUsingFiles(Path file) throws IOException {
+
+        List<String> lines = Arrays.asList("Hello", "Hey");
+
+        Files.write(
+                file,
+                lines,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.TRUNCATE_EXISTING
+        );
+
+        System.out.println("Data written using Files.write()");
     }
 
-    public void readFile(Path resolve) throws IOException {
-        List<String> list = Files.readAllLines(resolve, StandardCharsets.UTF_8);
-        for (String string : list) {
-            System.out.println(string);
+
+    // ===== Append Using BufferedWriter =====
+    public void appendUsingBufferedWriter(Path file) throws IOException {
+
+        try (BufferedWriter writer =
+                     Files.newBufferedWriter(file, StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
+
+            writer.newLine();
+            writer.write("Hi");
+        }
+
+        System.out.println("Data appended using BufferedWriter.");
+    }
+
+
+    // ===== Read Using Files =====
+    public void readUsingFiles(Path file) throws IOException {
+
+        List<String> lines = Files.readAllLines(file, StandardCharsets.UTF_8);
+
+        for (String line : lines) {
+            System.out.println(line);
         }
     }
 
-    public void writeBufferedFile(Path resolve) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resolve.toFile(), true))) {
-            bufferedWriter.write(System.lineSeparator());
-            bufferedWriter.write("HIE");
-        } catch (IOException ioException) {
-            throw new RuntimeException(ioException);
-        }
-        readBufferedFile(resolve);
-    }
 
-    public void readBufferedFile(Path resolve) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(resolve.toFile()))){
-            String string;
-            while ((string = bufferedReader.readLine()) != null) {
-                System.out.println(string);
+    // ===== Read Using BufferedReader =====
+    public void readUsingBufferedReader(Path file) throws IOException {
+
+        try (BufferedReader reader =
+                     Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-        } catch (IOException ioException) {
-            throw new RuntimeException(ioException);
         }
     }
 }
