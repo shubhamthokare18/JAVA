@@ -1,34 +1,32 @@
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        System.out.print("ENTER DAY NUMBER (1-7): ");
-        Scanner scanner = new Scanner(System.in);
-        int dayNumber = scanner.nextInt();
-        switch (dayNumber) {
-            case 1:
-                System.out.println("MONDAY");
-                break;
-            case 2:
-                System.out.println("TUESDAY");
-                break;
-            case 3:
-                System.out.println("WEDNESDAY");
-                break;
-            case 4:
-                System.out.println("THURSDAY");
-                break;
-            case 5:
-                System.out.println("FRIDAY");
-                break;
-            case 6:
-                System.out.println("SATURDAY");
-                break;
-            case 7:
-                System.out.println("SUNDAY");
-                break;
-            default:
-                System.out.println("INVALID DAY NUMBER");
+
+        try (Scanner scanner = new Scanner(System.in)) {
+
+            System.out.print("Enter day number (1-7): ");
+            int dayNumber = scanner.nextInt();
+
+            String dayName = getDayName(dayNumber);
+
+            System.out.println(dayName);
         }
+    }
+
+    // Method to return day name
+    public static String getDayName(int dayNumber) {
+
+        return switch (dayNumber) {
+            case 1 -> "MONDAY";
+            case 2 -> "TUESDAY";
+            case 3 -> "WEDNESDAY";
+            case 4 -> "THURSDAY";
+            case 5 -> "FRIDAY";
+            case 6 -> "SATURDAY";
+            case 7 -> "SUNDAY";
+            default -> "INVALID DAY NUMBER";
+        };
     }
 }

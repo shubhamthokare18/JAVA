@@ -1,13 +1,27 @@
 import java.util.Arrays;
 
 public class Main {
+
     public static void main(String[] args) {
-        int[] intArray = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int arraySum = 0;
-        for (int arrayElement : intArray) {
-            arraySum += arrayElement;
+
+        int[] numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        System.out.println("Array: " + Arrays.toString(numbers));
+
+        int sum = calculateSum(numbers);
+
+        System.out.println("Sum of Array Elements: " + sum);
+    }
+
+    // Method to calculate sum
+    public static int calculateSum(int[] array) {
+
+        int total = 0;
+
+        for (int num : array) {
+            total += num;
         }
-        System.out.println("ARRAY: " + Arrays.toString(intArray));
-        System.out.println("ARRAY ELEMENT SUM: " + arraySum);
+
+        return total;
     }
 }

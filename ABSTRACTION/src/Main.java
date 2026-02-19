@@ -1,19 +1,34 @@
+// Abstract class
 abstract class Animal {
+
+    // Abstract method (no body)
     abstract void animalSound();
+
+    // Concrete method
     public void animalSleep() {
-        System.out.println("ANIMAL SLEEP: ZZZZZZZZZZ");
+        System.out.println("Animal is sleeping... Zzzzz");
     }
 }
+
+// Child class (inherits Animal)
 class Dog extends Animal {
+
+    // Providing implementation for abstract method
     @Override
-    public void animalSound() {
-        System.out.println("DOG SOUND: BOW");
+    void animalSound() {
+        System.out.println("Dog barks: Bow Bow");
     }
 }
+
+// Main class
 public class Main {
+
     public static void main(String[] args) {
-        Dog dog = new Dog();
-        dog.animalSound();
-        dog.animalSleep();
+
+        // Creating object of Dog
+        Animal dog = new Dog();   // Upcasting (Best Practice)
+
+        dog.animalSound();  // Calls Dog implementation
+        dog.animalSleep();  // Calls Animal method
     }
 }
