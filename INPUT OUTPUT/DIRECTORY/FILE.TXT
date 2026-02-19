@@ -1,3 +1,4 @@
-HELLOHEY
-HIE
-HI
+Hello
+Hey
+Hi
+Welcome
