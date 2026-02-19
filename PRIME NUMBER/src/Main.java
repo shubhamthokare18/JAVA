@@ -1,15 +1,20 @@
 public class Main {
+
     public static void main(String[] args) {
-        for (int i = 2; i <= 100; i++) {
-            boolean primeNumber = true;
-            for (int j = 2; j <= i/2; j++) {
-                if (i % j == 0) {
-                    primeNumber = false;
-                    break;
-                }
-            } if (primeNumber) {
-                System.out.println("PRIME NUMBER: " + i);
-            }
-        }
+
+        int number = 10;
+        System.out.println("Initial number: " + number);
+
+        // Pre-increment → increment first, then assign
+        int preIncrementResult = ++number;
+        System.out.println("\nAfter Pre-Increment (++number):");
+        System.out.println("number = " + number);
+        System.out.println("preIncrementResult = " + preIncrementResult);
+
+        // Post-increment → assign first, then increment
+        int postIncrementResult = number++;
+        System.out.println("\nAfter Post-Increment (number++):");
+        System.out.println("number = " + number);
+        System.out.println("postIncrementResult = " + postIncrementResult);
     }
 }

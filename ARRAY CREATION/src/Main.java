@@ -2,19 +2,32 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        System.out.print("ENTER ARRAY SIZE: ");
+
         Scanner scanner = new Scanner(System.in);
-        int arraySize = scanner.nextInt();
-        int[] intArray = new int[arraySize];
-        for (int i = 0; i < intArray.length; i++) {
-            System.out.print("ENTER ARRAY ELEMENT: ");
-            intArray[i] = scanner.nextInt();
+
+        // Taking array size input
+        System.out.print("Enter array size: ");
+        int size = scanner.nextInt();
+
+        int[] numbers = new int[size];
+
+        // Taking array elements input
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.print("Enter element " + (i + 1) + ": ");
+            numbers[i] = scanner.nextInt();
         }
-        System.out.println("ARRAY: " + Arrays.toString(intArray));
-        System.out.println("ARRAY ELEMENT: ");
-        for (int arrayElement : intArray){
-            System.out.println(arrayElement);
+
+        // Printing full array
+        System.out.println("\nArray: " + Arrays.toString(numbers));
+
+        // Printing elements one by one
+        System.out.println("\nArray Elements:");
+        for (int num : numbers) {
+            System.out.println(num);
         }
+
+        scanner.close(); // Closing scanner (best practice)
     }
 }

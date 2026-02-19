@@ -1,9 +1,12 @@
 import java.io.*;
 
+// Serializable Class
 class Student implements Serializable {
 
-    int studentId;
-    String studentName;
+    private static final long serialVersionUID = 1L; // Best practice
+
+    private int studentId;
+    private String studentName;
 
     public Student(int studentId, String studentName) {
         this.studentId = studentId;
@@ -12,33 +15,52 @@ class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "STUDENT: {" +
-                "\"STUDENT ID\": " + studentId + "," +
-                "\"STUDENT NAME\": \"" + studentName + "\"" +
-                "}";
+        return "Student {" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                '}';
     }
 }
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    private static final String FILE_PATH =
+            "C:\\Users\\Sreenivas Bandaru\\Desktop\\JAVA\\SERIALIZATION DESERIALIZATION\\STUDENT.ser";
+
+    public static void main(String[] args) {
 
         Student student = new Student(1, "SHUBHAM");
 
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("C:\\Users\\Sreenivas Bandaru\\Desktop\\JAVA\\SERIALIZATION DESERIALIZATION\\STUDENT.SER"));
-            objectOutputStream.writeObject(student);
-            System.out.println("JAVA OBJECT TO BYTE STREAM");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        serializeStudent(student);
+        deserializeStudent();
+    }
 
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("C:\\Users\\Sreenivas Bandaru\\Desktop\\JAVA\\SERIALIZATION DESERIALIZATION\\STUDENT.SER"))) {
-            Student student1 = (Student) objectInputStream.readObject();
-            System.out.println("BYTE STREAM TO JAVA OBJECT");
-            System.out.println(student1);
+    // Serialization
+    private static void serializeStudent(Student student) {
+
+        try (ObjectOutputStream oos =
+                     new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
+
+            oos.writeObject(student);
+            System.out.println("✅ Object serialized successfully.");
+
+        } catch (IOException e) {
+            System.err.println("❌ Serialization failed: " + e.getMessage());
+        }
+    }
+
+    // Deserialization
+    private static void deserializeStudent() {
+
+        try (ObjectInputStream ois =
+                     new ObjectInputStream(new FileInputStream(FILE_PATH))) {
+
+            Student student = (Student) ois.readObject();
+            System.out.println("✅ Object deserialized successfully.");
+            System.out.println(student);
+
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.err.println("❌ Deserialization failed: " + e.getMessage());
         }
     }
 }

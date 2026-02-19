@@ -1,18 +1,25 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        ArrayList<String> nameArrayList = new ArrayList<>();
-        nameArrayList.add("ALICE");
-        nameArrayList.add("BHAVESH");
-        nameArrayList.add("AMIT");
-        nameArrayList.add("CHARLIE");
-        nameArrayList.add("ANKIT");
-        System.out.println("NAME ARRAY LIST: " + nameArrayList);
-        System.out.println("NAME START WITH 'A':");
-        for (String element : nameArrayList) {
-            if (element.startsWith("A")) {
-                System.out.println(element);
+
+        List<String> names = new ArrayList<>();
+
+        names.add("ALICE");
+        names.add("BHAVESH");
+        names.add("AMIT");
+        names.add("CHARLIE");
+        names.add("ANKIT");
+
+        System.out.println("Name List: " + names);
+
+        System.out.println("\nNames starting with 'A':");
+
+        for (String name : names) {
+            if (name.startsWith("A")) {
+                System.out.println(name);
             }
         }
     }
