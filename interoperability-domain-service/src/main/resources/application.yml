@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: interoperability-domain-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ids
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        default_schema: ids_schema
+        format_sql: true
+
+    show-sql: true
+
+server:
+  port: 8081
+
+temporal:
+  namespace: default
+  task-queue: ids-task-queue
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      aceActivity:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+  retry:
+    instances:
+      aceActivity:
+        maxAttempts: 3
+        waitDuration: 2s
+
+ace:
+  base-url: http://localhost:7800
+  wallet-validation: /emi/v1/walVal
+  wallet-transfer: /emi/v1/walTran
+  transaction-inquiry: /emi/v1/tranInqWal
+  account-inquiry: /v1/finacle/accInq
+  balance-inquiry: /finacle/balInq
+  transfer-account: /finacle/accTran

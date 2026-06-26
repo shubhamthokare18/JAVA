@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: temporal
+
+server:
+  port: 8081

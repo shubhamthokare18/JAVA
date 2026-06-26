@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: manager
+
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: eidiko
+    password: eidiko
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true

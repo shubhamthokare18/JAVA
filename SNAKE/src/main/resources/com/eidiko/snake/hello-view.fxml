@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eidiko.snake.SnakeController"
+            style="-fx-background-color: #1a1a1a;">
+    <top>
+        <Label fx:id="scoreLabel" text="Score: 0"
+               BorderPane.alignment="CENTER"
+               style="-fx-text-fill: #00ff00; -fx-font-size: 18; -fx-font-weight: bold; -fx-padding: 10;"/>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #1a1a1a;">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Canvas fx:id="canvas" width="400" height="400" style="-fx-background-color: black;"/>
+        </VBox>
+    </center>
+</BorderPane>
